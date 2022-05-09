@@ -31,6 +31,7 @@ func SetupDatabaseConnection() *gorm.DB {
 	return db
 }
 
+//just comm
 func CloseDatabaseConnection(db *gorm.DB) {
 	dbSQL, err := db.DB()
 	if err != nil {
