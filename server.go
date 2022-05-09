@@ -5,6 +5,8 @@ import (
 	"github.com/vovovoC/lofo-backend/config"
 	"github.com/vovovoC/lofo-backend/controller"
 	"gorm.io/gorm"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var (
@@ -14,12 +16,13 @@ var (
 
 func main() {
 	defer config.CloseDatabaseConnection(db)
+
 	r := gin.Default()
 
 	authRoutes := r.Group("api/auth")
 	{
-		authRoutes.POST("/login")
-		authRoutes.POST("/register")
+		authRoutes.POST("/login", authController.Login)
+		authRoutes.POST("/register", authController.Register)
 	}
 
 	r.Run()
