@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/vovovoC/lofo-backend/config"
 	"github.com/vovovoC/lofo-backend/controller"
-	"github.com/vovovoC/lofo-backend/middleware"
 	"github.com/vovovoC/lofo-backend/repository"
 	"github.com/vovovoC/lofo-backend/service"
 	"gorm.io/gorm"
@@ -28,7 +27,7 @@ func main() {
 
 	r := gin.Default()
 
-	authRoutes := r.Group("api/auth", middleware.AuthorizeJWT(jwtService))
+	authRoutes := r.Group("api/auth")
 	{
 		authRoutes.POST("/login", authController.Login)
 		authRoutes.POST("/register", authController.Register)
