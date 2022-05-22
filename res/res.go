@@ -1,9 +1,11 @@
 package res
 
-import "strings"
+import (
+	"strings"
+)
 
 type Response struct {
-	Status  bool        `json:"status"`
+	Status  int         `json:"status"`
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 	Errors  interface{} `json:"errors"`
@@ -11,7 +13,7 @@ type Response struct {
 
 type EmptyObj struct{}
 
-func BuildDataResponse(status bool, message string, data interface{}) Response {
+func BuildDataResponse(status int, message string, data interface{}) Response {
 	res := Response{
 		Status:  status,
 		Message: message,
@@ -21,10 +23,10 @@ func BuildDataResponse(status bool, message string, data interface{}) Response {
 	return res
 }
 
-func BuildErrorResponse(message string, err string, data interface{}) Response {
+func BuildErrorResponse(status int, message string, err string, data interface{}) Response {
 	splittedError := strings.Split(err, "\n")
 	res := Response{
-		Status:  false,
+		Status:  status,
 		Message: message,
 		Data:    data,
 		Errors:  splittedError,
